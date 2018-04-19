@@ -1,0 +1,40 @@
+<h3>Listado de Presupuestos</h3>
+
+<a class="btn btn-primary float-md-right" routerLink="/addpres">Añadir nuevo presupuesto</a>
+<br>
+<div *ngIf="cargando" class="text-center" style="padding-top: 60px;">
+    <img src="../../assets/spinner.gif" alt="cargando">
+</div>
+<div *ngIf="!cargando">
+    <table class="table table-bordered table-striped" style="margin-top: 40px;">
+        <thead>
+            <tr>
+                <th>Proveedor</th>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Importe sin IVA</th>
+                <th>IVA</th>
+                <th>Total</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let presupuesto of presupuestos">
+                <td>{{ presupuesto.proveedor }}</td>
+                <td>{{ presupuesto.fecha }}</td>
+                <td>{{ presupuesto.concepto }}</td>
+                <td>{{ presupuesto.base }}</td>
+                <td>{{ presupuesto.iva }}</td>
+                <td>{{ presupuesto.total }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" routerLink="/editpres/{{ presupuesto.id$ }}">Editar</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="eliminarPresupuesto(presupuesto.id$)"> Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
